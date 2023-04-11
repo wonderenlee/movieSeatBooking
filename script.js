@@ -10,6 +10,10 @@ let ticketPrice = +movieSelect.value;
 function updateSelectedCount() {
     const selectedSeats = document.querySelectorAll('.row .seat.selected');
 
+    const seatsIndex = [...selectedSeats].map(seat => [...seats].indexOf(seat));
+
+    localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
+
     const selectedSeatsCount = selectedSeats.length;
 
     count.innerText = selectedSeatsCount;
@@ -22,7 +26,7 @@ movieSelect.addEventListener('change', e => {
     updateSelectedCount();
 });
 
-container.addEventListener('click', e=> {
+container.addEventListener('click', e => {
     if (
         e.target.classList.contains('seat') &&
         !e.target.classList.contains('occupied')
